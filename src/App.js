@@ -21,9 +21,14 @@ const App = () => {
     const newNotes = [...notes, newNote];
     setNotes(newNotes);
   };
+
+  const deleteNote = (id) => {
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
+  };
   return (
     <div className="container">
-      <NotesList notes={notes} AddNote={addNote} />
+      <NotesList notes={notes} AddNote={addNote} Delete={deleteNote} />
     </div>
   );
 };

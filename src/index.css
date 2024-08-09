@@ -29,6 +29,7 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  white-space: pre-wrap;
 }
 
 textarea {
@@ -58,6 +59,10 @@ textarea::focus {
 .save::hover {
   background-color: aliceblue;
   cursor: pointer;
+}
+
+.del-btn {
+  
 }
 
 .footer {
