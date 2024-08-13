@@ -1,15 +1,23 @@
 import NotesList from "./components/NotesList";
+import SearchBar from "./components/SearchBar";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
-  const [notes, setNotes] = useState([
-    {
-      id: nanoid(),
-      text: "text",
-      date: "15",
-    },
-  ]);
+  const [notes, setNotes] = useState([]);
+  const [search, setSearch] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedNotes = JSON.parse(localStorage.getItem("notes-data"));
+    if (savedNotes) {
+      setNotes(savedNotes);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("notes-data", JSON.stringify(notes));
+  }, [notes]);
 
   const addNote = (text) => {
     const date = new Date();
@@ -27,8 +35,21 @@ const App = () => {
     setNotes(updatedNotes);
   };
   return (
-    <div className="container">
-      <NotesList notes={notes} AddNote={addNote} Delete={deleteNote} />
+    <div className={`${darkMode && "dark-mode"}`}>
+      <div className="container">
+        <h1 className="header">Notes App</h1>
+        <button onClick={() => setDarkMode((prev) => !prev)} className="save">
+          {darkMode ? "lightMode" : "darkMode"}
+        </button>
+        <SearchBar Search={setSearch} />
+        <NotesList
+          notes={notes.filter((note) =>
+            note.text.toLowerCase().includes(search)
+          )}
+          AddNote={addNote}
+          Delete={deleteNote}
+        />
+      </div>
     </div>
   );
 };

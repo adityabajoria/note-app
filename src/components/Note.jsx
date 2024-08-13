@@ -1,3 +1,5 @@
+import { FaDeleteLeft } from "react-icons/fa6";
+
 const Note = (props) => {
   const { id, text, date, Delete } = props;
   return (
@@ -5,9 +7,11 @@ const Note = (props) => {
       <span>{text}</span>
       <div className="footer">
         <small>{date}</small>
-        <button onClick={() => Delete(id)} className="del-btn" size="1.2em">
-          Delete
-        </button>
+        <FaDeleteLeft
+          onClick={() => Delete(id)}
+          className="del-btn"
+          size="1.2em"
+        />
       </div>
     </div>
   );
