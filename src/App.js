@@ -34,6 +34,7 @@ const App = () => {
     const updatedNotes = notes.filter((note) => note.id !== id);
     setNotes(updatedNotes);
   };
+
   return (
     <div className={`${darkMode && "dark-mode"}`}>
       <div className="container">
@@ -41,7 +42,7 @@ const App = () => {
         <button onClick={() => setDarkMode((prev) => !prev)} className="save">
           {darkMode ? "lightMode" : "darkMode"}
         </button>
-        <SearchBar Search={setSearch} />
+        <SearchBar onSearch={setSearch} /> {/* Update prop name */}
         <NotesList
           notes={notes.filter((note) =>
             note.text.toLowerCase().includes(search)

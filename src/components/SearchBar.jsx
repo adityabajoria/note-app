@@ -1,12 +1,13 @@
 import { MdSearch } from "react-icons/md";
-const SearchBar = ({ Search }) => {
+
+const SearchBar = ({ onSearch }) => {
   return (
     <div className="search">
       <MdSearch className="search-icon" size="1.2em" />
       <input
         type="text"
         placeholder="Search for note: "
-        onChange={(e) => Search(e.target.value)}
+        onChange={(e) => onSearch(e.target.value.toLowerCase())}
       />
     </div>
   );
